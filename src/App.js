@@ -1,25 +1,42 @@
+import React from 'react';
 import logo from './logo.svg';
+import Studenti from './components/studenti';
 import './App.css';
 
-function App() {
+class App extends React.Component{
+  
+  state={
+    studentet:[],
+    student:''
+  }
+  
+  render(){
+    const Studenta=()=>{
+     return  this.state.studentet.map(
+         (x)=>{
+           return <Studenti name={x}/>
+         }
+       )
+  }
+  const onClickStudentHandler=()=>this.setState({studentet:[...this.state.studentet,this.state.student]})
+
+   const onChangeStudentHandler =(event)=>{
+    console.log(event) 
+    this.setState({
+     student:event
+   })}
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+     <Studenta/>
+     <input type={'text'} onChange={(e)=>onChangeStudentHandler(e.target.value) } />
+<button style={{borderRadius:"90px"}} onClick={onClickStudentHandler} >Add Student</button>
     </div>
-  );
+    )
+    
+  }
+  
+  
 }
 
 export default App;
